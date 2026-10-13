@@ -9,7 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
-    lateinit var btn: Button
+    //lateinit var btn: Button
     lateinit var textView: TextView
     //private val listeners = arrayListOf<ListenersCustom>()
 
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        btn = findViewById(R.id.btn)
+        val btn = findViewById<Button>(R.id.btn)
         textView = findViewById(R.id.textView)
         /*listeners.addAll(
             arrayListOf(
