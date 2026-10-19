@@ -1,5 +1,6 @@
 package com.example.contadorviews
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -14,13 +15,14 @@ class MainActivity : AppCompatActivity() {
     //private val listeners = arrayListOf<ListenersCustom>()
 
     var comptador = 0
-    var text = "Comptador $comptador"
+    fun text() = "Comptador $comptador"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         val btn = findViewById<Button>(R.id.btn)
+        val btn2 = findViewById<Button>(R.id.btn2)
         textView = findViewById(R.id.textView)
         /*listeners.addAll(
             arrayListOf(
@@ -29,8 +31,11 @@ class MainActivity : AppCompatActivity() {
                 ToastShowListener(textView, "listener aplicado")
             )
         )*/
-
-        textView.text = text
+        intent.getIntExtra("NUMBER_COUNT",0).apply {
+            comptador = this
+            textView.text = text()
+        }
+        textView.text = text()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -40,6 +45,14 @@ class MainActivity : AppCompatActivity() {
 
         btn.setOnClickListener {
             comptador++
+            textView.text = text()
+
+        }
+
+        btn2.setOnClickListener{
+            val intent = Intent(this, SecondActivity::class.java).apply {
+                putExtra("NUMBER_COUNT", comptador)}
+            startActivity(intent)
         }
 
     }
